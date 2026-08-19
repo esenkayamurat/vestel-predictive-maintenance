@@ -1,0 +1,9 @@
+[
+  {"name": "device_id", "type": "STRING", "mode": "REQUIRED"},
+  {"name": "reading_timestamp", "type": "TIMESTAMP", "mode": "REQUIRED"},
+  {"name": "detected_at", "type": "TIMESTAMP", "mode": "REQUIRED"},
+  {"name": "motor_sicakligi", "type": "FLOAT64", "mode": "REQUIRED"},
+  {"name": "titresim_frekansi", "type": "FLOAT64", "mode": "REQUIRED"},
+  {"name": "guc_tuketimi", "type": "FLOAT64", "mode": "REQUIRED"},
+  {"name": "anomaly_score", "type": "FLOAT64", "mode": "REQUIRED"}
+]
