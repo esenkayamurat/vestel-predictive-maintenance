@@ -1,0 +1,26 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/pdm-training/pdm-ingest-api:$SHORT_SHA'
+      - './cloud-run-api'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'europe-west1-docker.pkg.dev/$PROJECT_ID/pdm-training/pdm-ingest-api:$SHORT_SHA'
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'pdm-ingest-api'
+      - '--image=europe-west1-docker.pkg.dev/$PROJECT_ID/pdm-training/pdm-ingest-api:$SHORT_SHA'
+      - '--region=europe-west1'
+      - '--allow-unauthenticated'
+      - '--set-env-vars=BQ_DATASET=telemetry,BQ_TABLE=sensor_readings,BQ_ALERTS_TABLE=acil_bakim_uyarilari,MODEL_GCS_PATH=gs://$PROJECT_ID-pdm-artifacts/models/isolation_forest/model.joblib'
+
+images:
+  - 'europe-west1-docker.pkg.dev/$PROJECT_ID/pdm-training/pdm-ingest-api:$SHORT_SHA'
