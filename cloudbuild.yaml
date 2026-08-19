@@ -24,3 +24,6 @@ steps:
 
 images:
   - 'europe-west1-docker.pkg.dev/$PROJECT_ID/pdm-training/pdm-ingest-api:$SHORT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
