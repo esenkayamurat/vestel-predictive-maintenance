@@ -44,7 +44,7 @@ class TelemetryReading(BaseModel):
 
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {"status": "ok", "model_loaded": model is not None}
 
 
 @app.post("/ingest")
